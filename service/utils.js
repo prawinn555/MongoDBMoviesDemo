@@ -81,7 +81,11 @@ module.exports = {
 	initRouter,
 	serviceListHTML : () => {
 		if(services.length===0) {
-			initRouter();
+			try {
+			  initRouter();
+	        } catch(e) {
+		      console.log(e);
+	        }
 		}
 		return `<h1>Welcome !!</h1> <p>the services are <ul>${services.join('')}</ul></p>`},
  };
