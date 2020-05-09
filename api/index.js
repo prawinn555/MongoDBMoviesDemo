@@ -6,5 +6,6 @@ module.exports = async (req, res) => {
     res.send(`${utils.serviceListHTML()}`);
   } catch(e)  {
 	console.error(e);
+	res.send('ERR '+e);
   }
 }
