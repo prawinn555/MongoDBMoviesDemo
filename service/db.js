@@ -12,10 +12,11 @@ try {
 
 	db.serialize(function(){
 	  if (!exists) {
-	    db.run('CREATE TABLE mydata (id TEXT, type TEXT, description TEXT, content TEXT)');
-	    console.log('New table created!');
+		let sql = `CREATE TABLE mydata (id TEXT, type TEXT, description TEXT, content TEXT)`;
+	    db.run(sql);
+	    console.log('Runing SQL', sql);
 	    
-	    var sql    = `INSERT INTO mydata (id, type, description) VALUES 
+	    var sql = `INSERT INTO mydata (id, type, description) VALUES 
 	          ("1", "test", "test"), 
 	          ("2", "test", "test"),
 	          ("3", "test", "test")
@@ -23,8 +24,7 @@ try {
 	    db.serialize(function() {
 	      db.run(sql);
 	    });
-	  }
-	  else {
+	  } else {
 	    console.log('Database ready to go!');
 	    console.log('Its content is the following : ');
 	    db.each('SELECT * from mydata', function(err, row) {
@@ -35,7 +35,7 @@ try {
 	  }
 	});
 } catch(e) {
-  console.log(e);
+  console.log('erreur init DB', e);
 }
 
 

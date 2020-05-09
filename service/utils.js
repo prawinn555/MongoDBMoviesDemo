@@ -12,6 +12,7 @@ function sendOk(response, msg) {
       message : msg });
 }
 
+var db = require('db.js');
 /**  
  * return Promise (number of lines changed) 
  * or throw error
@@ -46,7 +47,7 @@ var services = [];
 
 function initRouter(router) {
 	fs.readdirSync(directoryPath).forEach(function (file) {
-	        // Do whatever you want to do with the file
+	     try {
 		    let s =  file.split('.')[0];
 	        console.log(`${file} => ${s}`, file); 
 			let f = require('../api/' + file);
@@ -63,8 +64,13 @@ function initRouter(router) {
 				services.push(`<li><a href="/api/${s}">${s}</a> - last modified ${
 					fs.statSync(path.join(directoryPath, file)).mtime}</li>`);
 			}
+	    } catch(e) {
+		   console.error(`erreur in loading ${file}`, e);
+		   services.push(`<li>${s} - ${e} - last modified ${
+					fs.statSync(path.join(directoryPath, file)).mtime}</li>`);
+		}
 	
-	    });
+	});
 }
 
 
