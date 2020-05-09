@@ -12,17 +12,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-// the body of the request POST/PUT will be parsed as json.
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 
 // map paths to different functions
 app.use('/', router);
 
-// search static files in 'static' directories
-app.use(express.static('static'));
-
-
+let port = 1234;
 app.listen(port, () => {
     console.log('Server is up and running on port number ' + port);
 });
