@@ -16,7 +16,7 @@ try {
 	    db.run(sql);
 	    console.log('Runing SQL', sql);
 	    
-	    var sql = `INSERT INTO mydata (id, type, description) VALUES 
+	    sql = `INSERT INTO mydata (id, type, description) VALUES 
 	          ("1", "test", "test"), 
 	          ("2", "test", "test"),
 	          ("3", "test", "test")
