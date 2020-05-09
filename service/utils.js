@@ -82,7 +82,9 @@ module.exports = {
 	serviceListHTML : () => {
 		if(services.length===0) {
 			try {
+			  console.log('init list services');
 			  initRouter();
+			  console.log('init list services - fin');
 	        } catch(e) {
 		      console.log(e);
 	        }
