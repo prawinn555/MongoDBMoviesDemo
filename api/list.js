@@ -1,30 +1,27 @@
-var db = require('../service/db.js');
+var dbservice = require('../service/db.js');
 //var utils = required('../service/utils');
 
 module.exports = async (req, res) => {
 	
+  try {
+	  console.log('function list');
+	  // Get a database connection, cached or otherwise,
+	  // using the connection string environment variable as the argument
+	  const db = await dbservice.connectToDatabase();
+	
+	  
+	  // Select the "users" collection from the database
+	  const collection = await db.collection('movies');
+	
+	
+	  // Select the users collection from the database
+	  const movies = await collection.find().limit(3 ).toArray();
+	
+	  // Respond with a JSON string of all users in the collection
+	  res.status(200).json({ movies });
+  } catch(e) {
+	console.log(e);
+    res.send('error ' +e);
+  }
 
-  console.log('function list');
-
-  console.log('find by %j', req.query);
-
-  let typeCriteria = req.query.type;                                                
-  let criteria = (typeCriteria===undefined || typeCriteria==='')?  '%' : typeCriteria;
-  console.log('criteria '+criteria);
-  let sql    = ('true'===req.query.opposite)?
-       'SELECT id, type, description from mydata where type not like ?' :
-       'SELECT id, type, description from mydata where type like ?';
-                                                  
-
-  db.all(sql,[criteria],(err, rows ) => {
-    if (err) {
-      utils.sendError(res, 'DB error : ' + err);
-    } else { 
-      console.log(`result find liste ${rows.length} \n %j`, rows);
-      
-      res.status(200)
-      res.send(rows)
-    }
-
-  });
 }

@@ -1,45 +1,43 @@
-var fs = require('fs');
-var dbFile = './sqlite.db';
 
-var exists;
-var sqlite3 ;
-var db;
 
-var initDb = () => {
-	try {
-	  exists = fs.existsSync(dbFile);
-	  sqlite3 = require('sqlite3').verbose();
-	  db =  new sqlite3.Database(dbFile); 
-	
-		db.serialize(function(){
-		  if (!exists) {
-			let sql = `CREATE TABLE mydata (id TEXT, type TEXT, description TEXT, content TEXT)`;
-		    db.run(sql);
-		    console.log('Running SQL', sql);
-		    
-		    sql = `INSERT INTO mydata (id, type, description) VALUES 
-		          ("1", "test", "test"), 
-		          ("2", "test", "test"),
-		          ("3", "test", "test")
-		          `;
-		    db.serialize(function() {
-		      db.run(sql);
-		    });
-		  } else {
-		    console.log('Database ready to go!');
-		    console.log('Its content is the following : ');
-		    db.each('SELECT * from mydata', function(err, row) {
-		      if ( row ) {
-		        console.log('record:', row); 
-		      }
-		    });
-		  }
-		});
-	} catch(e) {
-	  console.log('error init DB', e);
-	}
+// Import Dependencies
+const url = require('url');
+const MongoClient = require('mongodb').MongoClient;
+
+// Create cached connection variable
+let cachedDb = null;
+
+
+async function connectToDatabase() {
+
+  let uri = process.env.DB_URI;
+  
+  // If the database connection is cached,
+  // use it instead of creating a new connection
+  if (cachedDb) {
+    return cachedDb;
+  }
+  let dbname = process.env.DB_NAME;
+
+  console.log(`uri ${uri} DB_NAME ${dbname}`);
+
+  // If no connection is cached, create a new one
+  const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true  });
+
+  // Select the database through the connection,
+  // using the database path of the connection string
+  
+  const db = await client.db(dbname);
+
+  // Cache the database connection and return the connection
+  cachedDb = db;
+  return db;
+}
+
+// The main, exported, function of the endpoint,
+// dealing with the request and subsequent response
+module.exports = {
+	connectToDatabase
 }
 
 
-// Export the model
-module.exports = db;

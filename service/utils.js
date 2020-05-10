@@ -12,36 +12,6 @@ function sendOk(response, msg) {
       message : msg });
 }
 
-var db;
-
-try {
-	db = require('./db.js');
-} catch(e) {
-	console.log(e);
-}
-/**  
- * return Promise (number of lines changed) 
- * or throw error
- */
-async function executeSqlChange(sql, params) {
-
-  return await new Promise(function(resolve, reject) {
-    // console.log('SQL', sql);
-    db.run(sql, params? params : [], function(err) {
-      if (err) {
-        
-        reject(err.message);
-      } else {
-        console.log(`result of ${sql} => changes ${this.changes}`) ;
-        resolve({
-          status : 'OK',
-          changes : this.changes});
-      }
-    });
-  });
-}
-
-
 
 
 const path = require('path');
@@ -93,7 +63,6 @@ function initPage() {
 module.exports = { 
 	sendOk,
 	sendError,
-	executeSqlChange, 
 	initRouter,
 	serviceListHTML : () => {
 		if(services.length===0) {
