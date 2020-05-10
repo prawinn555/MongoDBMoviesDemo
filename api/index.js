@@ -7,9 +7,10 @@ try {
 
 module.exports = async (req, res) => {
   
-  console.log('call index v1');
+  console.log('call index v2');
   try {
-    res.send(`${utils.serviceListHTML()}`);
+	res.send('hello');
+    // res.send(`${utils.serviceListHTML()}`);
   } catch(e)  {
 	console.error(e);
 	res.send('ERR '+e);

@@ -102,7 +102,7 @@ module.exports = {
 			  initPage();
 			  console.log('initPage - fin');
 	        } catch(e) {
-		      console.log(e);
+		      console.log('error initPage', e);
 	        }
 		}
 		return `<h1>Welcome !!</h1> <p>the services are <ul>${services.join('')}</ul></p>`},
