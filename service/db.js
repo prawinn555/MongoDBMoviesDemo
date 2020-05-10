@@ -35,7 +35,7 @@ try {
 	  }
 	});
 } catch(e) {
-  console.log('erreur init DB', e);
+  console.log('error init DB', e);
 }
 
 

@@ -12,7 +12,13 @@ function sendOk(response, msg) {
       message : msg });
 }
 
-var db = require('./db.js');
+var db;
+
+try {
+	db = require('./db.js');
+} catch(e) {
+	console.log(e);
+}
 /**  
  * return Promise (number of lines changed) 
  * or throw error
