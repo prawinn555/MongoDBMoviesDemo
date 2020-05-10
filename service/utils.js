@@ -70,6 +70,7 @@ function initRouter(router) {
 
 
 function initPage() {
+	console.log('initPage function');
 	fs.readdirSync(directoryPath).forEach(function (file) {
 	     try {
 		    let s =  file.split('.')[0];
@@ -97,9 +98,9 @@ module.exports = {
 	serviceListHTML : () => {
 		if(services.length===0) {
 			try {
-			  console.log('init list services');
+			  console.log('initPage');
 			  initPage();
-			  console.log('init list services - fin');
+			  console.log('initPage - fin');
 	        } catch(e) {
 		      console.log(e);
 	        }

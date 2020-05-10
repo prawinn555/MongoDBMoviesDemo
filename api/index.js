@@ -7,7 +7,7 @@ try {
 
 module.exports = async (req, res) => {
   
-  console.log('call index');
+  console.log('call index v1');
   try {
     res.send(`${utils.serviceListHTML()}`);
   } catch(e)  {
