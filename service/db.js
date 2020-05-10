@@ -7,6 +7,7 @@ const MongoClient = require('mongodb').MongoClient;
 // Create cached connection variable
 let cachedDb = null;
 
+let config = require('../config');
 
 async function connectToDatabase() {
 
@@ -17,7 +18,7 @@ async function connectToDatabase() {
   if (cachedDb) {
     return cachedDb;
   }
-  let dbname = process.env.DB_NAME;
+  let dbname = config.DB_NAME;
 
   console.log(`uri ${uri} DB_NAME ${dbname}`);
 
