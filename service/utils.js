@@ -55,29 +55,38 @@ function initRouter(router) {
 	fs.readdirSync(directoryPath).forEach(function (file) {
 	     try {
 		    let s =  file.split('.')[0];
-	        console.log(`${file} => ${s}`, file); 
+	        console.log(`init rounter ${file} => ${s}`, file); 
 			let f = require('../api/' + file);
-	
-			
 			if(s==='index') {
-				if(router) {
-					router.get('/api/',  f);
-				}
+				router.get('/api/',  f);
 			} else {
-				if(router) {
-					router.get('/api/' + s,  f);
-				}
+				router.get('/api/' + s,  f);
+			}
+	    } catch(e) {
+		   console.error(`error in loading ${file}`, e);
+		}
+	});
+}
+
+
+function initPage() {
+	fs.readdirSync(directoryPath).forEach(function (file) {
+	     try {
+		    let s =  file.split('.')[0];
+	        console.log(`${file} => ${s}`, file); 
+			if(s!=='index') {
 				services.push(`<li><a href="/api/${s}">${s}</a> - last modified ${
 					fs.statSync(path.join(directoryPath, file)).mtime}</li>`);
 			}
 	    } catch(e) {
-		   console.error(`erreur in loading ${file}`, e);
+		   console.error(`error in loading ${file}`, e);
 		   services.push(`<li>${s} - ${e} - last modified ${
 					fs.statSync(path.join(directoryPath, file)).mtime}</li>`);
 		}
 	
 	});
 }
+
 
 
 module.exports = { 
@@ -89,7 +98,7 @@ module.exports = {
 		if(services.length===0) {
 			try {
 			  console.log('init list services');
-			  initRouter();
+			  initPage();
 			  console.log('init list services - fin');
 	        } catch(e) {
 		      console.log(e);
