@@ -45,6 +45,10 @@ let findMovies = async (query) => {
 	  if(query.filter) { 
 		  cri = JSON.parse( utils.correctJson(query.filter) ) ; 
 	  }
+      let order = { year : -1};
+	  if(query.order) {
+		  order = JSON.parse( utils.correctJson(query.order) ) ; 
+	  }
       if(typeof cri !== 'object') {
 	      cri = {};
       }
@@ -57,7 +61,7 @@ let findMovies = async (query) => {
 	  // Select the "users" collection from the database
 	  const cursor = db.collection('movies').find(cri);
 	
-	  const [count, movies] = await Promise.all([cursor.count(), cursor.limit(limit ).toArray() ] );
+	  const [count, movies] = await Promise.all([cursor.count(), cursor.sort(order).limit(limit ).toArray() ] );
 	  return {count, movies};
 }
 
