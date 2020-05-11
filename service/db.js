@@ -9,6 +9,10 @@ let cachedDb = null;
 
 let config = require('../config');
 
+Object.defineProperty(RegExp.prototype, "toJSON", {
+  value: RegExp.prototype.toString
+});
+
 async function connectToDatabase() {
 
   let uri = process.env.DB_URI;

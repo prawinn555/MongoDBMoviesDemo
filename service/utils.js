@@ -21,22 +21,6 @@ const directoryPath = path.join(__dirname, '..', 'api');
 
 var services = [];
 
-function initRouter(router) {
-	fs.readdirSync(directoryPath).forEach(function (file) {
-	     try {
-		    let s =  file.split('.')[0];
-	        console.log(`init rounter ${file} => ${s}`, file); 
-			let f = require('../api/' + file);
-			if(s==='index') {
-				router.get('/api/',  f);
-			} else {
-				router.get('/api/' + s,  f);
-			}
-	    } catch(e) {
-		   console.error(`error in loading ${file}`, e);
-		}
-	});
-}
 
 
 function initPage() {
@@ -58,12 +42,15 @@ function initPage() {
 	});
 }
 
+function later(delay, value) {
+    return new Promise(resolve => setTimeout(resolve, delay, value));
+}
 
 
 module.exports = { 
+	later,
 	sendOk,
 	sendError,
-	initRouter,
 	serviceListHTML : () => {
 		if(services.length===0) {
 			try {
@@ -76,3 +63,5 @@ module.exports = {
 		}
 		return `<h1>Welcome !!</h1> <p>the services are <ul>${services.join('')}</ul></p>`},
  };
+
+

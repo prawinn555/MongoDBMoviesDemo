@@ -1,6 +1,6 @@
 module.exports = async (req, res) => {
   
-  console.log('call index v2');
+  console.log('call index');
   try {
     var utils = require('../service/utils');
     res.send(`${utils.serviceListHTML()}`);

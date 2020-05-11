@@ -2,9 +2,9 @@
 const express = require('express');
 const app = express(); 
 
-const router = require('./routes/router'); 
 
 require('dotenv').config();
+const router = require('./routes/router'); 
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -27,8 +27,8 @@ let testDB = async () => {
 	console.log('Test DB');
 	const db = await dbservice.connectToDatabase();
 	// see http://mongodb.github.io/node-mongodb-native/3.1/api/Db.html#listCollections
-	let col = await db.listCollections().toArray();
-	console.log('db collections', col);
+	let col = await db.listCollections({}, { nameOnly : true}).toArray();
+	console.log('db collections', col);	
 }	
 
 testDB();	
