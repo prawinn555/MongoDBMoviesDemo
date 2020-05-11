@@ -13,6 +13,14 @@ function sendOk(response, msg) {
 }
 
 
+function prepareHeader(res) { 
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Authorization, Accept, Content-Type'
+  )
+}
 
 const path = require('path');
 const fs = require('fs');
@@ -51,6 +59,7 @@ module.exports = {
 	later,
 	sendOk,
 	sendError,
+	prepareHeader,
 	serviceListHTML : () => {
 		if(services.length===0) {
 			try {

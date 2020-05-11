@@ -22,6 +22,7 @@ var processRegex = (cri) => {
 module.exports = async (req, res) => {
 	
   try {
+	  utils.prepareHeader(res);
 	  const query = url.parse(req.url,true).query;
 
 	  // Select the users collection from the database
