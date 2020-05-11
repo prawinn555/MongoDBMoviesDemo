@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 
 	
 	  // Respond with a JSON string of all users in the collection
-	  res.status(200).json({ version : 1, movies });
+	  res.status(200).json({ version : 1.1, movies });
   } catch(e) {
 	console.log(e);
     utils.sendError(res, 'Error ' +e);
