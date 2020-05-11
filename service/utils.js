@@ -51,9 +51,19 @@ function later(delay, value) {
     return new Promise(resolve => setTimeout(resolve, delay, value));
 }
 
+let correctJson = (s) => {
+   let r = s.replace(/['"]?([$a-z0-9A-Z_]+)['"]?\s*:/g, '"$1":')
+              // correct simple pattern
+            .replace(/['"]?(\/[\w\s]+\/)['"]?/gi, '"$1"');
+   if(s!==r) {
+      console.log('correctedJson ',r);
+   }
+   return r;
+};
 
 module.exports = { 
 	later,
+	correctJson,
 	sendOk,
 	sendError,
 	prepareHeader,

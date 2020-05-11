@@ -43,7 +43,7 @@ let findMovies = async (query) => {
 	  console.log('findMovies', query);
       let cri = {};
 	  if(query.filter) { 
-		  cri = JSON.parse( correctJson(query.filter) ) ; 
+		  cri = JSON.parse( utils.correctJson(query.filter) ) ; 
 	  }
       if(typeof cri !== 'object') {
 	      cri = {};
@@ -61,15 +61,7 @@ let findMovies = async (query) => {
 	  return {count, movies};
 }
 
-let correctJson = (s) => {
-   let r = s.replace(/['"]?([$a-z0-9A-Z_]+)['"]?\s*:/g, '"$1":')
-              // correct simple pattern
-            .replace(/(\/[\w\s]+\/)/gi, '"$1"');
-   if(s!==r) {
-      console.log('correctedJson ',r);
-   }
-   return r;
-};
+
 
 // test 
 let test = async () => {
