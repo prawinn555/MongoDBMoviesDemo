@@ -26,11 +26,11 @@ module.exports = async (req, res) => {
 	  const query = url.parse(req.url,true).query;
 
 	  // Select the users collection from the database
-	  const movies = await findMovies(query);
+	  const moviesInfo = await findMovies(query);
 
 	
 	  // Respond with a JSON string of all users in the collection
-	  res.status(200).json({ version : 1.01, movies });
+	  res.status(200).json({ version : 1.01, ...moviesInfo });
   } catch(e) {
 	console.log(e);
     utils.sendError(res, 'Error ' +e);
@@ -55,9 +55,10 @@ let findMovies = async (query) => {
 	  // using the connection string environment variable as the argument
 	  const db = await dbservice.connectToDatabase();
 	  // Select the "users" collection from the database
-	  const collection = await db.collection('movies');
+	  const cursor = db.collection('movies').find(cri);
 	
-	  return collection.find(cri).limit(limit ).toArray();
+	  const [count, movies] = await Promise.all([cursor.count(), cursor.limit(limit ).toArray() ] );
+	  return {count, movies};
 }
 
 let correctJson = (s) => {
