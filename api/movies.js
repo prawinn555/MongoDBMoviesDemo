@@ -25,11 +25,8 @@ module.exports = async (req, res) => {
 	  utils.prepareHeader(res);
 	  const query = url.parse(req.url,true).query;
 
-	  // Select the users collection from the database
 	  const moviesInfo = await findMovies(query);
 
-	
-	  // Respond with a JSON string of all users in the collection
 	  res.status(200).json({ version : 1.01, ...moviesInfo });
   } catch(e) {
 	console.log(e);
@@ -55,10 +52,7 @@ let findMovies = async (query) => {
       processRegex(cri);
 	  let limit = query.limit? parseInt(query.limit) : 3;
 
-	  // Get a database connection, cached or otherwise,
-	  // using the connection string environment variable as the argument
 	  const db = await dbservice.connectToDatabase();
-	  // Select the "users" collection from the database
 	  const cursor = db.collection('movies').find(cri);
 	
 	  const [count, movies] = await Promise.all([cursor.count(), cursor.sort(order).limit(limit ).toArray() ] );
