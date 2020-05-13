@@ -99,3 +99,9 @@ if(process.env.RUN_TEST) {
 *   Example `/api/movies.js` => `http://<host:port>/api/movies`
 * No test execution at start time (`process.env.RUN_TEST` is undefined).
 
+## More info
+
+See Wiki !!
+
+https://github.com/prawinn555/MongoDBMoviesDemo/wiki
+
