@@ -64,6 +64,7 @@ The VERCEL environment is configured to do auto deploy : GIT push => deploy auto
 
 The deployment is fast, because of the serverless architecture (stateless) : no application code is executed on start up.
 
+<img src="https://ahmadawais.com/wp-content/uploads/2020/04/vercel.jpg" alt="VercelLogo" width=200 />
 
 ## Difference between running locally and running on the VERCEL
 
