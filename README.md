@@ -29,6 +29,33 @@ classic way 🎄
 npm start
 ```
 
+## Important code
+
+package.json
+
+```
+ "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "mongodb": "^3.5.7"
+  }
+```
+ 
+```
+  const MongoClient = require('mongodb').MongoClient;
+  const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true  });
+  const db = await client.db(dbname);
+  
+  let limit=1;
+  let cri={ title : '/devil/i' };
+  const cursor = db.collection('movies').find(cri);
+  const [count, movies] = await Promise.all([cursor.count(), cursor.sort(order).limit(limit ).toArray() ] );
+```
+
+Learn more about [API](https://www.mongodb.com/docs/drivers/node/current/quick-reference/).
+
+
+
 ## Service URL : find movies 🐩
 
 🎞️   📽️  🎬   🎥   🎦 
