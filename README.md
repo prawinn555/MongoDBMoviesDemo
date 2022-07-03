@@ -43,7 +43,7 @@ see https://docs.mongodb.com/manual/tutorial/query-documents/
 <img src="https://webassets.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png" width="150" alt="LogoMongoDB" >
 
 
-We have simplified JSON syntax. For example `{"year":2005}` can be written `{"year":2005}` 
+We have simplified JSON syntax. For example `{"year":2005}` can be written `{ year :2005}` 
 (JSON attributes can be written without `"`).
 
 For REGEX (equivalent to LIKE in SQL), we can write, for example, `{cast:/tom cruise/}`.  This will be translated to `/tom cruise/i` (find ignore case).
