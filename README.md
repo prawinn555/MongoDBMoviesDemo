@@ -62,7 +62,7 @@ Technically 🤓 , first the attribute value is recognized as String, then the s
 
 
 
-VERCEL (https://vercel.com/) is a serviceless (= stateless) service platform.
+VERCEL (https://vercel.com/) is a [serviceless (= stateless) service platform](https://vercel.com/docs/concepts/functions).
 
 We can deploy a free application in their cloud (no cost) 🐤.
 
@@ -72,16 +72,12 @@ The deployment is fast, because of the serverless architecture (stateless) : no 
 
 <img src="https://ahmadawais.com/wp-content/uploads/2020/04/vercel.jpg" alt="VercelLogo" width=200 />
 
-## Difference between running locally and running on the VERCEL
+## commun architecture
 
-### On local
-
-* The `server.js` script is executed.
-* Then, the file `.env`` is loaded. (URI of MongoDB)
-* The `routes/router.js` script is executed.
-* The routes are constructed ( The file `/api/<X>.js` is mapped to the exposed URL `http://<host:port>/api/<X>` )
-*   Example `/api/movies.js` => `http://<host:port>/api/movies`
-* Tests are executed at the start time, for instance, @movies.js
+There is a main function per fichier JS.
+*   Example1 `/api/movies.js` => `http://<host:port>/api/movies`
+*   Example2 `/api/index.js`  => `http://<host:port>/api/index`
+* This is the example of the main function (input => http request, output => http response).
 
 ```
 let test = async () => {
@@ -98,13 +94,41 @@ if(process.env.RUN_TEST) {
 ```
 
 
+## Difference between running locally and running on the VERCEL
+
+### On local
+
+* The `server.js` script is executed.
+* Then, the file `.env`` is loaded. (URI of MongoDB)
+* The `routes/router.js` script is executed.
+* The routes are constructed ( The file `/api/<X>.js` is mapped to the exposed URL `http://<host:port>/api/<X>` )
+* Lets' remind the previously explained examples.
+*   Example1 `/api/movies.js` => `http://<host:port>/api/movies`
+*   Example2 `/api/index.js`  => `http://<host:port>/api/index`
+
+* Tests are executed at the start time, for instance, @movies.js
+
+
+
 ### On VERCEL
 
 * The `server.js` script is NOT executed.
 * Then, the file `.env` is NOT loaded. The URI MangoDB must be specified on the Web console (or by other means).
 * The routes are constructed by the VERCEL framework, NOT bt `routes/router.js` : Same rule, the file `/api/<X>.js` is mapped to the exposed URL `http://<host:port>/api/<X>` )
-*   Example `/api/movies.js` => `http://<host:port>/api/movies`
+
 * No test execution at start time (`process.env.RUN_TEST` is undefined).
+
+### Testing VERCEL
+
+
+Example of the URL
+
+https://verceltest-smoky.vercel.app/api/movies?filter=%7B%22title%22%3A%22%2Fprada%2F%22%7D&limit=10
+
+
+https://verceltest-smoky.vercel.app/api/index
+
+
 
 ## More info
 
