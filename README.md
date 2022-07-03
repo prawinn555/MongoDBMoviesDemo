@@ -1,5 +1,11 @@
 # Service with MangoDB 🐩
 
+## An interesting article
+
+https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb-how-to-get-connected-to-your-database
+
+
+
 ## configuration 🐩
 
 see `.env` file.
