@@ -58,7 +58,7 @@ Technically 🤓 , first the attribute value is recognized as String, then the s
 
 VERCEL (https://vercel.com/) is a serviceless (= stateless) service platform.
 
-We can deply a free application in their cloud (no cost) 🐤.
+We can deploy a free application in their cloud (no cost) 🐤.
 
 The VERCEL environment is configured to do auto deploy : GIT push => deploy automatically. 😎 😎 😎
 
@@ -102,7 +102,7 @@ if(process.env.RUN_TEST) {
 
 ## More info
 
-See Wiki !!
+Wiki ;)
 
 https://github.com/prawinn555/MongoDBMoviesDemo/wiki
 
